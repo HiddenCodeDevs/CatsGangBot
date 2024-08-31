@@ -184,7 +184,7 @@ class Tapper:
 
     async def create_user(self, http_client: aiohttp.ClientSession):
         try:
-            response = await http_client.post(url=f'https://cats-backend-wkejfn-production.up.railway.app/user/create?'
+            response = await http_client.post(url=f'https://cats-backend-cxblew-prod.up.railway.app/user/create?'
                                                   f'referral_code={self.start_param}')
             if response.status in [200, 201]:
                 self.success('Successfully created user')
@@ -196,7 +196,7 @@ class Tapper:
 
     async def get_user_info(self, http_client: aiohttp.ClientSession):
         try:
-            response = await http_client.get(url='https://cats-backend-wkejfn-production.up.railway.app/user')
+            response = await http_client.get(url='https://cats-backend-cxblew-prod.up.railway.app/user')
             resp_json = await response.json()
             ref_rewards = resp_json.get('referrerReward')
             tasks_rewards = resp_json.get('tasksReward')
@@ -211,7 +211,7 @@ class Tapper:
 
     async def get_tasks(self, http_client: aiohttp.ClientSession):
         try:
-            response = await http_client.get(url='https://cats-backend-wkejfn-production.up.railway.app/'
+            response = await http_client.get(url='https://cats-backend-cxblew-prod.up.railway.app/'
                                                  'tasks/user?group=cats')
             resp_json = await response.json()
             return resp_json
@@ -226,7 +226,7 @@ class Tapper:
             if open_link_ids:
                 for id, reward in open_link_ids:
                     response = await http_client.post(
-                        url=f"https://cats-backend-wkejfn-production.up.railway.app/tasks/{id}/complete",
+                        url=f"https://cats-backend-cxblew-prod.up.railway.app/tasks/{id}/complete",
                         json={})
                     resp_json = await response.json()
                     if resp_json.get('success') is True:
@@ -247,7 +247,7 @@ class Tapper:
 
                     await self.tg_client.join_chat(username)
                     await asyncio.sleep(1)
-                    response = await http_client.post(url=f'https://cats-backend-wkejfn-production.up.railway.app/'
+                    response = await http_client.post(url=f'https://cats-backend-cxblew-prod.up.railway.app/'
                                                           f'tasks/{id}/check', json={})
                     resp_json = await response.json()
                     if resp_json.get('completed') is True:
